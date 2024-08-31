@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6b4df0b-1785-4992-b0a5-be22dbf22a4c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Bricoli_back/src/main/java/com/example/bricoli/models/Personne.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bricoli_back/src/main/java/com/example/bricoli/models/Personne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bricoli_back/src/main/java/com/example/bricoli/models/Prestataire.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bricoli_back/src/main/java/com/example/bricoli/models/Prestataire.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +30,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2lGCSQSawvQy3c4OlOnfOjmJ0h5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -43,7 +43,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/it_support/IT-support-App/IT-support-App/IT-support-App/support_back",
+    "last_opened_file_path": "C:/Users/user/Desktop/Bricoli",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,6 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1724797029829</updated>
       <workItem from="1724797030949" duration="1850000" />
+      <workItem from="1724948657854" duration="31000" />
     </task>
     <servers />
   </component>
