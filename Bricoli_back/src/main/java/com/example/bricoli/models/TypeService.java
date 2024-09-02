@@ -20,5 +20,4 @@ public class TypeService {
     int id ;
     String typeService;
 
-
 }
