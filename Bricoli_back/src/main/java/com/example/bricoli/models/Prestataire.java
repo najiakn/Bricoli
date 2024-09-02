@@ -28,7 +28,7 @@ public class Prestataire extends Personne {
             joinColumns = @JoinColumn(name = "prestataire_id"), // Colonne de jointure pour Prestataire
             inverseJoinColumns = @JoinColumn(name = "service_id") // Colonne de jointure pour Service
     )
-    private Set<Service> services;
+    private Set<ServiceModel> services;
 
 
 }

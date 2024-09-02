@@ -2,7 +2,6 @@ package com.example.bricoli.models;
 
 import com.example.bricoli.enums.Categorie;
 import com.example.bricoli.enums.Etat_service;
-import com.example.bricoli.enums.Role;
 import com.example.bricoli.enums.TypePaiement;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,8 +14,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Service {
+public class ServiceModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -30,6 +28,10 @@ public class Service {
     @ManyToMany(mappedBy = "services")
     private Set<Prestataire> prestataires;
 
+
+
+    @ManyToMany(mappedBy = "services")
+    private Set<Client> clients;
 
     @Enumerated(EnumType.STRING)
     private Etat_service etatService;

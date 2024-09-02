@@ -4,9 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
@@ -21,5 +19,5 @@ public class Client  extends Personne{
             joinColumns = @JoinColumn(name = "clientId"), // Colonne de jointure pour Prestataire
             inverseJoinColumns = @JoinColumn(name = "serviceId") // Colonne de jointure pour Service
     )
-    private Set<Service> services;
+    private Set<ServiceModel> services;
 }
