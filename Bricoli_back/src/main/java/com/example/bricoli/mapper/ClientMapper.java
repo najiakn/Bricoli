@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ClientMapper {
     Client toEntity(ClientDto DTO);
-    ClientMapper toDTO(ClientMapper entity);
+    ClientDto toDTO(Client entity);
     List<ClientDto> toDTOList(List<Client> Clients);
-    List<ClientMapper> toEntityList(List<ClientDto> ClientDtos);
+    List<Client> toEntityList(List<ClientDto> ClientDtos);
 }

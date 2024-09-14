@@ -9,5 +9,5 @@ import lombok.*;
 @Data
 public class TypeServiceDto {
     private int id;
-    private String typeService;
+    private String nomType;
 }

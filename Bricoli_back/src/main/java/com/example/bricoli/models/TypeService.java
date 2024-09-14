@@ -18,6 +18,6 @@ public class TypeService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id ;
-    String typeService;
+    String nomType;
 
 }

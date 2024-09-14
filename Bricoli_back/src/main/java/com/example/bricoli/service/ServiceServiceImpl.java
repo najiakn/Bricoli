@@ -1,6 +1,7 @@
 package com.example.bricoli.service;
 
 import com.example.bricoli.dto.ServiceDto;
+import com.example.bricoli.mapper.ReclamationMapper;
 import com.example.bricoli.mapper.ServiceMapper;
 import com.example.bricoli.models.ServiceModel;
 import com.example.bricoli.repository.ServiceRepository;
@@ -12,18 +13,20 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ServiceServiceImpl  implements ServiceService{
+public class ServiceServiceImpl  implements ServiceService {
+
     @Autowired
     private ServiceRepository serviceRepository;
-
+    @Autowired
+    private ReclamationMapper reclamationMapper;
     @Autowired
     private ServiceMapper serviceMapper;
 
 
     @Override
     public ServiceDto create(ServiceDto serviceDto) {
-        ServiceModel services = serviceMapper.toEntity(serviceDto);
-        return serviceMapper.toDTO(serviceRepository.save(services));
+        ServiceModel servicemodels = serviceMapper.toEntity(serviceDto);
+        return serviceMapper.toDTO(serviceRepository.save(servicemodels));
     }
 
 
@@ -35,8 +38,8 @@ public class ServiceServiceImpl  implements ServiceService{
 
     @Override
     public List<ServiceDto> getAll() {
-        List<ServiceModel> services = serviceRepository.findAll();
-        return services.stream()
+        List<ServiceModel> servicemodels = serviceRepository.findAll();
+        return servicemodels.stream()
                 .map(serviceMapper::toDTO)
                 .collect(Collectors.toList());
     }
@@ -60,17 +63,21 @@ public class ServiceServiceImpl  implements ServiceService{
             serviceModel.setCategorie(serviceModel.getCategorie());
             serviceModel.setPrix(serviceModel.getPrix());
             serviceModel.setTitre(serviceModel.getTitre());
-            serviceModel.setDate_Creation(serviceModel.getDate_Creation());
+            serviceModel.setDateCreation(serviceModel.getDateCreation());
             serviceModel.setPrestataires(serviceModel.getPrestataires());
             serviceModel.setTypePaiement(serviceModel.getTypePaiement());
             serviceModel.setClients(serviceModel.getClients());
+            serviceModel.setImage(serviceModel.getImage());
+            serviceModel.setTypeService(serviceModel.getTypeService());
+
+
 
             ServiceModel updateService = serviceRepository.save(serviceModel);
             return serviceMapper.toDTO(updateService);
         } else {
             return null;
         }
+
+
     }
-
-
 }

@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.Set;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Getter
@@ -19,11 +19,10 @@ public class ServiceModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String titre;
-    @Lob
     private String description;
     private  int prix ;
-
-    private Date date_Creation;
+    private String image;
+    private Date dateCreation;
 
     @ManyToMany(mappedBy = "services")
     private Set<Prestataire> prestataires;
