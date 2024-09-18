@@ -22,10 +22,10 @@ public class Reclamation {
 
 
     @ManyToOne
-    @JoinColumn(name = "idClient", nullable = false)
+    @JoinColumn(name = "clientId", nullable = false)
     private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "idPrestataire", nullable = false)
+    @JoinColumn(name = "prestataireId", nullable = false)
     private Prestataire prestataire;
 }
