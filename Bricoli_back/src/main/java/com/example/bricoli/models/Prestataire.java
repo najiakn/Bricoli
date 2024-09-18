@@ -3,6 +3,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -11,24 +14,22 @@ import java.util.Set;
 @Entity
 public class Prestataire extends Personne {
 
-    
-    private String zone_deplacement;
 
-    @Lob
-    private byte[] profil;
+    private String profil;
 
-    @Lob
-    private byte[] cnie;
 
+    private String cnie;
+
+    private String zoneDeplacement;
 
 
     @ManyToMany
     @JoinTable(
-            name = "prestataire_service", // Nom de la table de jointure
-            joinColumns = @JoinColumn(name = "prestataire_id"), // Colonne de jointure pour Prestataire
-            inverseJoinColumns = @JoinColumn(name = "service_id") // Colonne de jointure pour Service
+            name = "prestataire_service",
+            joinColumns = @JoinColumn(name = "prestataire_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id")
     )
-    private Set<ServiceModel> services;
+    private Set<ServiceModel> services = new HashSet<>();
 
 
 }

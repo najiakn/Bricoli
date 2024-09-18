@@ -52,7 +52,7 @@ public class PrestataireServiceImpl implements PrestataireService{
             prestataire.setEmail(prestataireDto.getEmail());
             prestataire.setCnie(prestataireDto.getCnie());
             prestataire.setProfil(prestataireDto.getProfil());
-            prestataire.setZone_deplacement(prestataireDto.getZoneDeplacement());
+            prestataire.setZoneDeplacement(prestataireDto.getZoneDeplacement());
             prestataire.setAge(prestataireDto.getAge());
             prestataire.setGenre(prestataireDto.getGenre());
             prestataire.setPassword(prestataire.getPassword());

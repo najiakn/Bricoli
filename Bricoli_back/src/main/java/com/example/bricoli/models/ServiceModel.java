@@ -5,6 +5,8 @@ import com.example.bricoli.enums.Etat_service;
 import com.example.bricoli.enums.TypePaiement;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 import java.sql.Date;
@@ -25,7 +27,8 @@ public class ServiceModel {
     private Date dateCreation;
 
     @ManyToMany(mappedBy = "services")
-    private Set<Prestataire> prestataires;
+    private Set<Prestataire> prestataires = new HashSet<>();
+
 
 
 
