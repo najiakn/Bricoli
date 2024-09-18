@@ -6,5 +6,4 @@ import java.util.Set;
 
 @Data
 public class ClientDto extends PersonneDto {
-    private Set<Integer> serviceId;
 }
