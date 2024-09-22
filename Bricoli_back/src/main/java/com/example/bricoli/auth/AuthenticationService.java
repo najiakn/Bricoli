@@ -28,7 +28,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     //RegisterClient:
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationResponse registerClient(RegisterRequest request) {
         var user = new Client();
 
         user.setNom(request.getNom());
@@ -45,8 +45,8 @@ public class AuthenticationService {
 
     }
 
-    //RegisterTechnicien :
-    public AuthenticationResponse registerTech(RegisterRequest request) {
+    //RegisterPrestataire
+    public AuthenticationResponse registerPres(RegisterRequest request) {
         var user =new Prestataire();
 
         user.setNom(request.getNom());
