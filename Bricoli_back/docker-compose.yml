@@ -1,0 +1,21 @@
+version: "3.4"
+services:
+  server:
+    build: .
+    restart: always
+    ports:
+      - 8083:8083
+    depends_on:
+      - postgresdb
+  postgresdb:
+    image: "postgres:latest"
+    restart: always
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_DB: bricoli
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - db:/var/lib/postgres
+volumes:
+  db:
