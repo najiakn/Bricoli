@@ -41,9 +41,9 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-
-
     }
+
+
 
     //RegisterPrestataire
     public AuthenticationResponse registerPres(RegisterRequest request) {
@@ -60,9 +60,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-
-
     }
+
 
     //Register Admin ;
     public AuthenticationResponse registerAdmin(RegisterRequest request) {
@@ -79,9 +78,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-
-
     }
+
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
@@ -91,6 +89,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
+
         var user = personneRepository.findByEmail(request.getMail())
                 .orElseThrow();
         System.out.print(user);
@@ -99,9 +98,6 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
 
-
     }
-
-
 
 }
