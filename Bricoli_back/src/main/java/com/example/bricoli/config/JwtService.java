@@ -3,12 +3,14 @@ package com.example.bricoli.config;
 
 
 
+import com.example.bricoli.models.Personne;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JwtService {
 
+
     private static final  String SECRET_KEY ="OQ8s4uDjTJqQNtghPJEsQ6o75iX00vYuT88EMpCiJIA=\n";
 
     public String extractUsername(String token) {
@@ -37,9 +40,11 @@ public class JwtService {
 
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, int userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", extractRoles(userDetails.getAuthorities()));
+        claims.put("id",userId);
+
         return generateToken(claims, userDetails);
 
     }

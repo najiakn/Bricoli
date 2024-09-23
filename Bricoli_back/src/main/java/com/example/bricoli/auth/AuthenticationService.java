@@ -37,7 +37,7 @@ public class AuthenticationService {
         user.setRole(Role.CLIENT);
 
         user = personneRepository.save(user);
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(user,user.getId());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
@@ -56,7 +56,7 @@ public class AuthenticationService {
 
         user = personneRepository.save(user);
 
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(user,user.getId());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
@@ -75,7 +75,7 @@ public class AuthenticationService {
 
         user = personneRepository.save(user);
 
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(user,user.getId());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
@@ -94,7 +94,7 @@ public class AuthenticationService {
         var user = personneRepository.findByEmail(request.getMail())
                 .orElseThrow();
         System.out.print(user);
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(user,user.getId());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();

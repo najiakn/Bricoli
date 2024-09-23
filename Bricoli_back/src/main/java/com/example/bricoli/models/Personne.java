@@ -3,6 +3,7 @@ package com.example.bricoli.models;
 import com.example.bricoli.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Personne implements UserDetails {
     @Id
