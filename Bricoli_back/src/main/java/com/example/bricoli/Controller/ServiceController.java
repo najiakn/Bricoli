@@ -4,8 +4,10 @@ import com.example.bricoli.dto.ServiceDto;
 import com.example.bricoli.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,15 +20,16 @@ public class ServiceController {
     @Autowired
     private ServiceService serviceService;
 
-    @PostMapping("/create-service")
-    public ResponseEntity<?> createService(@RequestBody ServiceDto serviceDto) {
+    @PostMapping(value = "/create-service", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> createService(@RequestPart("service") ServiceDto serviceDto, @RequestPart("image") MultipartFile image) {
         try {
-            var service = serviceService.create(serviceDto);
+            var service = serviceService.create(serviceDto,image);
             return ResponseEntity.status(HttpStatus.CREATED).body(service);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteService(@PathVariable("id") int id) {

@@ -15,10 +15,12 @@ public class ServiceDto {
     private String titre;
     private String description;
     private int prix;
-    private String image;
     private Date dateCreation;
     private Etat_service etatService;
     private Categorie categorie;
     private TypePaiement typePaiement;
     private int idType;
+    private String imageUrl;
+    private String cloudinaryImageId;
+
 }
