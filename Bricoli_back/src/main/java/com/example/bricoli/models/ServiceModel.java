@@ -30,8 +30,6 @@ public class ServiceModel {
     private Set<Prestataire> prestataires = new HashSet<>();
 
 
-
-
     @ManyToMany(mappedBy = "services")
     private Set<Client> clients;
 

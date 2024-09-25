@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/services")
-
+@CrossOrigin("*")
 
 public class ServiceController {
 
@@ -34,7 +34,7 @@ public class ServiceController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<ServiceDto>> getAllServices() {
         List<ServiceDto> services = serviceService.getAll();
         return ResponseEntity.ok(services);
