@@ -11,4 +11,5 @@ public interface ServiceService {
     List<ServiceDto> getAll();
     ServiceDto getServiceById(int id);
     ServiceDto update(int id, ServiceDto serviceDto );
+    List<ServiceDto> getAllOffreServices();
 }

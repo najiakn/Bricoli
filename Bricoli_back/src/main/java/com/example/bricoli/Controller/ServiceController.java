@@ -63,4 +63,10 @@ public class ServiceController {
         }
     }
 
+    @GetMapping("/offre")
+    public ResponseEntity<List<ServiceDto>> getAllOffreServices() {
+        List<ServiceDto> offreServices = serviceService.getAllOffreServices();
+        return ResponseEntity.ok(offreServices);
+    }
+
 }
