@@ -27,9 +27,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
 
                      .requestMatchers( "/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/services/**","/api/prestatires/**").hasAuthority("PRESTATAIRE")
+                        .requestMatchers("/api/services/**","/api/prestatires/**","/api/typeServices/**").hasAuthority("PRESTATAIRE")
 
-                        .requestMatchers("/api/clients/**","/api/services/**","/api/reclamations/**","/api/prestatires/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/clients/**","/api/services/**","/api/reclamations/**","/api/prestatires/**","/api/typeServices/**").hasAuthority("ADMIN")
 
                         //.requestMatchers("/api/pannes/**").hasAuthority("ADMIN")
                         //.requestMatchers("/api/equipements/all","/api/utilisateur/**").hasAuthority("UTILISATEUR")

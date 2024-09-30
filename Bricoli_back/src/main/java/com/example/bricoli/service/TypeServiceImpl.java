@@ -1,9 +1,11 @@
 package com.example.bricoli.service;
 
 import com.example.bricoli.dto.ClientDto;
+import com.example.bricoli.dto.PrestataireDto;
 import com.example.bricoli.dto.TypeServiceDto;
 import com.example.bricoli.mapper.TypeServiceMapper;
 import com.example.bricoli.models.Client;
+import com.example.bricoli.models.Prestataire;
 import com.example.bricoli.models.TypeService;
 import com.example.bricoli.repository.TypeServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +58,7 @@ public class TypeServiceImpl  implements  TypeServieService {
         Optional<TypeService> optionalTypeService = typeServiceRepository.findById(id);
         if (optionalTypeService.isPresent()) {
             TypeService typeService = optionalTypeService.get();
-            typeService.setNomType(typeService.getNomType());
+            typeService.setNomType(typeServiceDto.getNomType());
 
             TypeService updateTypeService =typeServiceRepository.save(typeService);
             return typeServiceMapper.toDTO(updateTypeService);
@@ -64,7 +66,12 @@ public class TypeServiceImpl  implements  TypeServieService {
             return null;
         }
     }
-}
+    
+
+ }
+
+
+
 
 
 
