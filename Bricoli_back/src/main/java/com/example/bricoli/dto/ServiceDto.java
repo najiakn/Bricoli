@@ -21,6 +21,5 @@ public class ServiceDto {
     private TypePaiement typePaiement;
     private int idType;
     private String imageUrl;
-    private String cloudinaryImageId;
 
 }

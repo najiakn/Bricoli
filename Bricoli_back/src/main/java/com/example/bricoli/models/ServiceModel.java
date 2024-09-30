@@ -26,7 +26,6 @@ public class ServiceModel {
     private Date dateCreation;
 
     private String imageUrl;
-    private String cloudinaryImageId;
     @ManyToMany(mappedBy = "services")
     private Set<Prestataire> prestataires = new HashSet<>();
 

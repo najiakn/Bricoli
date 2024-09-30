@@ -36,37 +36,9 @@ public class ServiceServiceImpl  implements ServiceService {
 
     @Override
 
-    public ServiceDto create(ServiceDto serviceDto, MultipartFile image) {
-        ServiceModel serviceModel = serviceMapper.toEntity(serviceDto);
-
-        // Handle image upload
-        if (image != null && !image.isEmpty()) {
-            FileUploadUtil.assertAllowed(image, FileUploadUtil.IMAGE_PATTERN);
-
-            // Extract the base name and extension from the original file name
-            String originalFileName = image.getOriginalFilename();
-            String baseName = originalFileName != null ? originalFileName.substring(0, originalFileName.lastIndexOf('.')) : "service";
-            String extension = originalFileName != null ? originalFileName.substring(originalFileName.lastIndexOf('.') + 1) : "png";
-
-            String fileName = FileUploadUtil.getFileName(baseName, extension);
-
-            CloudinaryResponse response = cloudinaryService.uploadFile(image, fileName, "image");
-
-            serviceModel.setImageUrl(response.getUrl());
-            serviceModel.setCloudinaryImageId(response.getPublicId());
-        }
-
-        // Set other fields
-        serviceModel.setDateCreation(new Date(System.currentTimeMillis()));
-        serviceModel.setEtatService(Etat_service.EN_COURS); // Or any default state you prefer
-
-        // Save serviceModel entity to the database
-        ServiceModel savedServiceModel = serviceRepository.save(serviceModel);
-
-        // Convert saved entity to DTO
-        ServiceDto savedServiceDto = serviceMapper.toDTO(savedServiceModel);
-
-        return savedServiceDto;
+    public ServiceDto create(ServiceDto serviceDto) {
+        var service = serviceMapper.toEntity(serviceDto);
+        return serviceMapper.toDTO(serviceRepository.save(service));
     }
 
 
