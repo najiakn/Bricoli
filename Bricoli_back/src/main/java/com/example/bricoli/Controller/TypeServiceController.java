@@ -60,4 +60,8 @@ public class TypeServiceController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/name/{id}")
+    public String findNameById(@PathVariable Integer id) {
+        return typeServieService.findNameById(id);
+    }
 }

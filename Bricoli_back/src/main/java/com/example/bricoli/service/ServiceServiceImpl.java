@@ -7,7 +7,10 @@ import com.example.bricoli.mapper.ServiceMapper;
 import com.example.bricoli.models.CloudinaryResponse;
 import com.example.bricoli.models.FileUploadUtil;
 import com.example.bricoli.models.ServiceModel;
+import com.example.bricoli.models.TypeService;
 import com.example.bricoli.repository.ServiceRepository;
+import com.example.bricoli.repository.TypeServiceRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +25,9 @@ public class ServiceServiceImpl  implements ServiceService {
 
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
+    private TypeServiceRepository typeServiceRepository;
+
 
 
     @Autowired
@@ -63,6 +69,14 @@ public class ServiceServiceImpl  implements ServiceService {
                 .map(serviceMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<ServiceDto> getAllCategorieService() {
+        List<ServiceModel> serviceModels = serviceRepository.findCategorieServices();
+        return serviceModels.stream()
+                .map(serviceMapper::toDTO)
+                .collect(Collectors.toList());    }
+
     @Override()
     public ServiceDto getServiceById(int id) {
         Optional<ServiceModel> serviceModel = serviceRepository.findById(id);
@@ -74,19 +88,22 @@ public class ServiceServiceImpl  implements ServiceService {
         Optional<ServiceModel> optionalService = serviceRepository.findById(id);
         if (optionalService.isPresent()) {
             ServiceModel serviceModel = optionalService.get();
-            serviceModel.setDescription(serviceModel.getDescription());
-            serviceModel.setTypeService(serviceModel.getTypeService());
-            serviceModel.setEtatService(serviceModel.getEtatService());
-            serviceModel.setCategorie(serviceModel.getCategorie());
-            serviceModel.setPrix(serviceModel.getPrix());
-            serviceModel.setTitre(serviceModel.getTitre());
-            serviceModel.setDateCreation(serviceModel.getDateCreation());
-            serviceModel.setPrestataires(serviceModel.getPrestataires());
-            serviceModel.setTypePaiement(serviceModel.getTypePaiement());
-            serviceModel.setClients(serviceModel.getClients());
-            serviceModel.setImageUrl(serviceModel.getImageUrl());
-            serviceModel.setImageUrl(serviceModel.getImageUrl());
-            serviceModel.setTypeService(serviceModel.getTypeService());
+            serviceModel.setDescription(serviceDto.getDescription());
+            serviceModel.setEtatService(serviceDto.getEtatService());
+            serviceModel.setCategorie(serviceDto.getCategorie());
+            serviceModel.setPrix(serviceDto.getPrix());
+            serviceModel.setTitre(serviceDto.getTitre());
+            serviceModel.setDateCreation(serviceDto.getDateCreation());
+            serviceModel.setTypePaiement(serviceDto.getTypePaiement());
+            serviceModel.setImageUrl(serviceDto.getImageUrl());
+
+            TypeService typeService = typeServiceRepository.findById(serviceDto.getIdType())
+                    .orElseThrow(() -> new EntityNotFoundException("TypeService not found"));
+            serviceModel.setTypeService(typeService);
+
+            // Save updated serviceModel
+            serviceRepository.save(serviceModel);
+
 
 
 

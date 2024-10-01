@@ -2,6 +2,7 @@ package com.example.bricoli.Controller;
 
 import com.example.bricoli.dto.ServiceDto;
 import com.example.bricoli.service.ServiceService;
+import com.example.bricoli.service.TypeServieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,10 @@ public class ServiceController {
 
     @Autowired
     private ServiceService serviceService;
+
+
+    @Autowired
+    private TypeServieService typeServieService;
 
     @PostMapping( "/create-service")
     public ResponseEntity<?> createService(@RequestBody ServiceDto serviceDto) {
@@ -65,5 +70,16 @@ public class ServiceController {
         List<ServiceDto> offreServices = serviceService.getAllOffreServices();
         return ResponseEntity.ok(offreServices);
     }
+
+
+
+    @GetMapping("/categoriService")
+    public ResponseEntity<List<ServiceDto>> getAllCategoriServices() {
+        List<ServiceDto> categoriServices = serviceService.getAllCategorieService();
+        return ResponseEntity.ok(categoriServices);
+    }
+
+
+
 
 }

@@ -10,4 +10,5 @@ public interface TypeServieService {
     List<TypeServiceDto> getAll();
     TypeServiceDto getTypeServiceById(int id);
     TypeServiceDto update(int id, TypeServiceDto typeServiceDto );
+    String findNameById(Integer id);
 }
