@@ -10,4 +10,6 @@ import java.util.List;
 public interface TypeServiceRepository extends JpaRepository<TypeService,Integer > {
     @Query("SELECT t.nomType FROM TypeService t WHERE t.id = :id")
     String findNameById(Integer id);
+
+
 }
