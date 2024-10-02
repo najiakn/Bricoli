@@ -12,4 +12,7 @@ public interface TypeServiceRepository extends JpaRepository<TypeService,Integer
     String findNameById(Integer id);
 
 
+    boolean existsByNomType(String nomType);
+
+
 }

@@ -2,6 +2,7 @@ package com.example.bricoli.service;
 
 
 import com.example.bricoli.dto.TypeServiceDto;
+import com.example.bricoli.exceptions.TypeServiceAlreadyExistsException;
 import com.example.bricoli.mapper.TypeServiceMapper;
 
 import com.example.bricoli.models.TypeService;
@@ -22,11 +23,17 @@ public class TypeServiceImpl  implements  TypeServieService {
     private TypeServiceRepository typeServiceRepository;
 
 
-    @Override
     public TypeServiceDto create(TypeServiceDto typeServiceDto) {
-        var typeservice = typeServiceMapper.toEntity(typeServiceDto);
-        return typeServiceMapper.toDTO(typeServiceRepository.save(typeservice));
-    }
+        // Check if a TypeService with the same nomType already exists
+        if (typeServiceRepository.existsByNomType(typeServiceDto.getNomType())) {
+            throw new TypeServiceAlreadyExistsException("Le type de service '" + typeServiceDto.getNomType() + "' existe déjà.");
+        }
+
+        var typeService = typeServiceMapper.toEntity(typeServiceDto);
+        var savedTypeService = typeServiceRepository.save(typeService);
+        return typeServiceMapper.toDTO(savedTypeService);
+
+}
 
 
     @Override
