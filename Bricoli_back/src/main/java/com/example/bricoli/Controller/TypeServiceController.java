@@ -1,6 +1,7 @@
 package com.example.bricoli.Controller;
 
 import com.example.bricoli.dto.TypeServiceDto;
+import com.example.bricoli.exceptions.TypeServiceAlreadyExistsException;
 import com.example.bricoli.service.TypeServieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,10 +24,12 @@ public class TypeServiceController {
         try {
             var typeService = typeServieService.create(typeServiceDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(typeService);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (TypeServiceAlreadyExistsException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
+
+
 
     @DeleteMapping("/delete-type-service/{id}")
     public ResponseEntity<Void> deleteTypeService(@PathVariable("id") int id) {
