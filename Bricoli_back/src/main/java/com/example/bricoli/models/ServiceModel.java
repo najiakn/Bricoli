@@ -3,9 +3,11 @@ package com.example.bricoli.models;
 import com.example.bricoli.enums.Categorie;
 import com.example.bricoli.enums.Etat_service;
 import com.example.bricoli.enums.TypePaiement;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +25,9 @@ public class ServiceModel {
     private String titre;
     private String description;
     private  int prix ;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+
+
     private Date dateCreation;
 
     private String imageUrl;
