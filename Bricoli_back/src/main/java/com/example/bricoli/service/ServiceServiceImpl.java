@@ -77,6 +77,14 @@ public class ServiceServiceImpl  implements ServiceService {
                 .map(serviceMapper::toDTO)
                 .collect(Collectors.toList());    }
 
+    @Override
+    public List<ServiceDto> getAllOffres() {
+        List<ServiceModel> serviceModels = serviceRepository.findOffres();
+        return serviceModels.stream()
+                .map(serviceMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     @Override()
     public ServiceDto getServiceById(int id) {
         Optional<ServiceModel> serviceModel = serviceRepository.findById(id);

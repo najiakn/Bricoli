@@ -12,4 +12,8 @@ public interface ServiceRepository  extends JpaRepository<ServiceModel,Integer >
 
     @Query(value = "SELECT * FROM service_model WHERE categorie = 'SERVICE'", nativeQuery = true)
     List<ServiceModel> findCategorieServices();
+
+
+    @Query(value = "SELECT * FROM service_model WHERE categorie = 'OFFRE'", nativeQuery = true)
+    List<ServiceModel> findOffres();
 }

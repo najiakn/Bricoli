@@ -13,6 +13,6 @@ public interface ServiceService {
     ServiceDto update(int id, ServiceDto serviceDto );
     List<ServiceDto> getAllOffreServices();
     List<ServiceDto> getAllCategorieService();
-
+    List<ServiceDto>getAllOffres();
 
 }

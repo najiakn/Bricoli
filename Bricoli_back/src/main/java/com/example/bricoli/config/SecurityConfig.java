@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
 
                      .requestMatchers( "/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/services/**","/api/prestataires/**","/api/typeServices/**").hasAuthority("PRESTATAIRE")
+                        .requestMatchers("/api/services/**","/api/prestataires/**","/api/typeServices/**").hasAnyAuthority("PRESTATAIRE","CLIENT")
 
                         .requestMatchers("/api/clients/**","/api/services/**","/api/reclamations/**","/api/prestataires/**","/api/typeServices/**").hasAuthority("ADMIN")
 

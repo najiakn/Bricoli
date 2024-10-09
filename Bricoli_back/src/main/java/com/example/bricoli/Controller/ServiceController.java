@@ -33,7 +33,7 @@ public class ServiceController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-service/{id}")
     public ResponseEntity<Void> deleteService(@PathVariable("id") int id) {
         serviceService.delete(id);
         return ResponseEntity.noContent().build();
@@ -55,7 +55,7 @@ public class ServiceController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update-service/{id}")
     public ResponseEntity<ServiceDto> updateService(@PathVariable("id") int id, @RequestBody ServiceDto serviceDto) {
         ServiceDto updateService = serviceService.update(id, serviceDto);
         if (updateService != null) {
