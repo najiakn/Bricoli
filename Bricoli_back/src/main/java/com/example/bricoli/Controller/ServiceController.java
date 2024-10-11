@@ -1,11 +1,14 @@
 package com.example.bricoli.Controller;
 
 import com.example.bricoli.dto.ServiceDto;
+import com.example.bricoli.models.Personne;
 import com.example.bricoli.service.ServiceService;
 import com.example.bricoli.service.TypeServieService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +44,7 @@ public class ServiceController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ServiceDto>> getAllServices() {
+
         List<ServiceDto> services = serviceService.getAll();
         return ResponseEntity.ok(services);
     }
@@ -53,6 +57,7 @@ public class ServiceController {
         } else {
             return ResponseEntity.notFound().build();
         }
+
     }
 
     @PutMapping("/update-service/{id}")
