@@ -84,6 +84,11 @@ public class ServiceController {
         return ResponseEntity.ok(categoriServices);
     }
 
+    @GetMapping("/client-services/{clientId}")
+    public ResponseEntity<List<ServiceDto>> getServicesByClient(@PathVariable("clientId") int clientId) {
+        List<ServiceDto> services = serviceService.getServicesByClient(clientId);
+        return ResponseEntity.ok(services);
+    }
 
 
 

@@ -15,12 +15,7 @@ import java.util.Set;
 public class Prestataire extends Personne {
 
 
-    private String profil;
 
-
-    private String cnie;
-
-    private String zoneDeplacement;
 
 
     @ManyToMany

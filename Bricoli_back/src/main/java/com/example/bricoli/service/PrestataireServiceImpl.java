@@ -55,10 +55,9 @@ public class PrestataireServiceImpl implements PrestataireService{
             prestataire.setZoneDeplacement(prestataireDto.getZoneDeplacement());
             prestataire.setAge(prestataireDto.getAge());
             prestataire.setGenre(prestataireDto.getGenre());
-            prestataire.setPassword(prestataire.getPassword());
-            prestataire.setRole(prestataire.getRole());
-            prestataire.setVille(prestataire.getVille());
-            prestataireDto.setTelephone(prestataire.getTelephone());
+            prestataire.setPassword(prestataireDto.getPassword());
+            prestataire.setVille(prestataireDto.getVille());
+            prestataireDto.setTelephone(prestataireDto.getTelephone());
            Prestataire updatePrestataire =prestataireRepository.save(prestataire);
            return prestataireMapper.toDTO(updatePrestataire);
 

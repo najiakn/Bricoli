@@ -14,5 +14,5 @@ public interface ServiceService {
     List<ServiceDto> getAllOffreServices();
     List<ServiceDto> getAllCategorieService();
     List<ServiceDto>getAllOffres();
-
+     List<ServiceDto> getServicesByClient(int clientId);
 }

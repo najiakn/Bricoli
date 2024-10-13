@@ -123,4 +123,12 @@ public class ServiceServiceImpl  implements ServiceService {
 
 
     }
+    @Override
+    public List<ServiceDto> getServicesByClient(int clientId) {
+        List<ServiceModel> serviceModels = serviceRepository.findByClients_Id(clientId);
+        return serviceModels.stream()
+                .map(serviceMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 }
