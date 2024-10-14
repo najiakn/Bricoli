@@ -1,10 +1,9 @@
 package com.example.bricoli.Controller;
 
 import com.example.bricoli.dto.PrestataireDto;
-import com.example.bricoli.dto.ReclamationDto;
+
 import com.example.bricoli.models.Prestataire;
 import com.example.bricoli.service.PrestataireService;
-import com.example.bricoli.service.ReclamantionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +15,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/prestataires")
+@CrossOrigin("*")
+
 public class PrestataireController {
     @Autowired
     private PrestataireService prestataireService;
@@ -36,7 +37,7 @@ public class PrestataireController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<PrestataireDto>> getAllPrestataires() {
         List<PrestataireDto> prestataires = prestataireService.getAll();
         return ResponseEntity.ok(prestataires);

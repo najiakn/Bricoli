@@ -49,13 +49,10 @@ public class PrestataireServiceImpl implements PrestataireService{
             Prestataire prestataire = optionalPrestataire.get();
             prestataire.setNom(prestataireDto.getNom());
             prestataire.setPrenom(prestataireDto.getPrenom());
-            prestataire.setEmail(prestataireDto.getEmail());
             prestataire.setCnie(prestataireDto.getCnie());
-            prestataire.setProfil(prestataireDto.getProfil());
             prestataire.setZoneDeplacement(prestataireDto.getZoneDeplacement());
             prestataire.setAge(prestataireDto.getAge());
             prestataire.setGenre(prestataireDto.getGenre());
-            prestataire.setPassword(prestataireDto.getPassword());
             prestataire.setVille(prestataireDto.getVille());
             prestataireDto.setTelephone(prestataireDto.getTelephone());
            Prestataire updatePrestataire =prestataireRepository.save(prestataire);
