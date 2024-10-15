@@ -26,6 +26,15 @@ public class ServiceController {
 
     @Autowired
     private TypeServieService typeServieService;
+    @GetMapping("/my-services")
+    public List<ServiceDto> getMyServices() {
+        return serviceService.getServicesByAuthenticatedPrestataire();
+    }
+
+    @GetMapping("/my-offres")
+    public List<ServiceDto> getMyOffrs() {
+        return serviceService.getServicesByAuthenticatedClient();
+    }
 
     @PostMapping("/create-service")
     public ResponseEntity<?> createService(@RequestBody ServiceDto serviceDto) {
@@ -40,6 +49,27 @@ public class ServiceController {
 
             // Création du service
             var service = serviceService.createServiceForPrestataire( serviceDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(service);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/create-offre")
+    public ResponseEntity<?> createOffre(@RequestBody ServiceDto serviceDto) {
+        try {
+            // Récupération de l'authentification à partir du SecurityContext
+            Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+
+            // Extraction des détails utilisateur à partir de l'authentification
+            Personne client = (Personne) authentication.getPrincipal(); // Assurez-vous que `Personne` contient l'ID du prestataire
+
+            int clientId = client.getId(); // Utilisez l'ID du prestataire
+
+            // Création du service
+            var service = serviceService.createServiceForClient( serviceDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(service);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

@@ -20,4 +20,7 @@ public interface ServiceRepository  extends JpaRepository<ServiceModel,Integer >
     @Query("SELECT s FROM ServiceModel s JOIN s.clients c WHERE c.id = :clientId")
     List<ServiceModel> findByClients_Id(int clientId);
 
+
+
+
 }

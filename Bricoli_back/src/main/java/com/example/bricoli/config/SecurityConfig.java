@@ -34,7 +34,7 @@ public class SecurityConfig {
 
                      .requestMatchers( "/api/v1/auth/**").permitAll()
 
-                        .requestMatchers("/api/services/**","/api/prestataires/**","/api/typeServices/**").hasAnyAuthority("PRESTATAIRE","CLIENT","ADMIN")
+                        .requestMatchers("/api/clients/**","/api/services/**","/api/prestataires/**","/api/typeServices/**").hasAnyAuthority("PRESTATAIRE","CLIENT","ADMIN")
 
                         .requestMatchers("/api/clients/**","/api/services/**","/api/reclamations/**","/api/prestataires/**","/api/typeServices/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/prestataires/me/{id}","/api/prestataires/me").hasRole("PRESTATAIRE")
