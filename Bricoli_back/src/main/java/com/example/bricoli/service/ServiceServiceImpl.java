@@ -4,14 +4,14 @@ import com.example.bricoli.dto.ServiceDto;
 import com.example.bricoli.enums.Etat_service;
 import com.example.bricoli.mapper.ReclamationMapper;
 import com.example.bricoli.mapper.ServiceMapper;
-import com.example.bricoli.models.CloudinaryResponse;
-import com.example.bricoli.models.FileUploadUtil;
-import com.example.bricoli.models.ServiceModel;
-import com.example.bricoli.models.TypeService;
+import com.example.bricoli.models.*;
+import com.example.bricoli.repository.PrestataireRepository;
 import com.example.bricoli.repository.ServiceRepository;
 import com.example.bricoli.repository.TypeServiceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +27,8 @@ public class ServiceServiceImpl  implements ServiceService {
     private ServiceRepository serviceRepository;
     @Autowired
     private TypeServiceRepository typeServiceRepository;
-
+    @Autowired
+    private PrestataireRepository prestataireRepository;
 
 
     @Autowired
@@ -40,12 +41,34 @@ public class ServiceServiceImpl  implements ServiceService {
     private CloudinaryService cloudinaryService;
 
 
-    @Override
+    public ServiceDto createServiceForPrestataire(ServiceDto serviceDto) {
+        // Récupérer l'authentification actuelle
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    public ServiceDto create(ServiceDto serviceDto) {
-        var service = serviceMapper.toEntity(serviceDto);
-        return serviceMapper.toDTO(serviceRepository.save(service));
+        // Extraire l'objet Personne à partir des détails de l'utilisateur authentifié
+        Personne personne = (Personne) authentication.getPrincipal();
+
+        // Vérifier si l'utilisateur est un prestataire
+        Prestataire prestataire = prestataireRepository.findById(personne.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Prestataire not found"));
+
+        // Mapper le DTO vers l'entité ServiceModel
+        ServiceModel serviceModel = serviceMapper.toEntity(serviceDto);
+
+        // Sauvegarder le service dans le repository
+        ServiceModel savedService = serviceRepository.save(serviceModel);
+
+        // Ajouter le service au prestataire via la table Many-to-Many
+        prestataire.getServices().add(savedService);
+
+        // Sauvegarder la mise à jour du prestataire avec les services associés
+        prestataireRepository.save(prestataire);
+
+        // Retourner le service sauvegardé en tant que DTO
+        return serviceMapper.toDTO(savedService);
     }
+
+
 
 
     @Override

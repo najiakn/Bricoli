@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ServiceService {
-    ServiceDto create(ServiceDto serviceDto) ;
+    public ServiceDto createServiceForPrestataire( ServiceDto serviceDto)  ;
     void delete(int id);
     List<ServiceDto> getAll();
     ServiceDto getServiceById(int id);

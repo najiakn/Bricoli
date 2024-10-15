@@ -4,10 +4,11 @@ import com.example.bricoli.dto.ServiceDto;
 import com.example.bricoli.models.Personne;
 import com.example.bricoli.service.ServiceService;
 import com.example.bricoli.service.TypeServieService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +27,22 @@ public class ServiceController {
     @Autowired
     private TypeServieService typeServieService;
 
-    @PostMapping( "/create-service")
+    @PostMapping("/create-service")
     public ResponseEntity<?> createService(@RequestBody ServiceDto serviceDto) {
         try {
-            var service = serviceService.create(serviceDto);
+            // Récupération de l'authentification à partir du SecurityContext
+            Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+
+            // Extraction des détails utilisateur à partir de l'authentification
+            Personne prestataire = (Personne) authentication.getPrincipal(); // Assurez-vous que `Personne` contient l'ID du prestataire
+
+            int prestataireId = prestataire.getId(); // Utilisez l'ID du prestataire
+
+            // Création du service
+            var service = serviceService.createServiceForPrestataire( serviceDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(service);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
