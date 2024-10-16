@@ -49,12 +49,11 @@ public class ClinetServiceImpl implements ClientService{
             Client client = optionalClient.get();
             client.setNom(clientDto.getNom());
             client.setPrenom(clientDto.getPrenom());
-            client.setEmail(clientDto.getEmail());
             client.setAge(clientDto.getAge());
             client.setGenre(clientDto.getGenre());
             client.setTelephone(clientDto.getTelephone());
             client.setVille(clientDto.getVille());
-            client.setPassword(client.getPassword());
+            client.setCnie(clientDto.getCnie());
 
             Client updateClient =clientRepository.save(client);
             return clientMapper.toDTO(updateClient);
