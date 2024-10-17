@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any//any serveur
 
     environment {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
@@ -11,7 +11,7 @@ pipeline {
     }
 
      tools {
-            maven 'mvn'
+            maven 'mvn'//le nom de maven dans config jenkins
      }
 
     stages {
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     dir('Bricoli_back') {
-                        bat "docker build -t ${IMAGE_NAME} ."
+                        bat "docker build -t ${IMAGE_NAME} ." //builder les images dans socker
                     }
                 }
             }
@@ -60,7 +60,7 @@ pipeline {
      stage('Tag and Push Docker Images') {
          steps {
              script {
-                 def imageTag = "${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"
+                 def imageTag = "${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}" //creer objet
                  docker.withRegistry("https://index.docker.io/v1/", DOCKER_CREDENTIAL_ID) {
                      bat """
                          docker tag ${IMAGE_NAME}:latest ${imageTag}
